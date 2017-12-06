@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2017/06/21 08:01:53 by jrobin           ###   ########.fr       */
+/*   Updated: 2017/12/06 11:39:10 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int				ft_toupper(int i);
 int				ft_tolower(int i);
 char			*ft_strcat(char *dest, const char *src);
 char			*ft_strncat(char *dest, const char *src, unsigned long size);
-unsigned long	ft_strlcat(char *dest, const char *src, unsigned long size);
 void			*ft_memalloc(size_t size);
 char			**ft_strplit(char const *s, char c);
 void			ft_putchar(char c);
@@ -72,7 +71,6 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char const *str, int fd);
 char			**ft_strsplit(char const *str, char c);
 void			ft_putnbr(int n);
-int				ft_power_10(int i);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 
@@ -89,5 +87,6 @@ void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+int				ft_lstinsert(t_list *insert, t_list **lst);
 
 #endif

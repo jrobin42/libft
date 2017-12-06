@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2017/10/23 16:42:41 by jrobin           ###   ########.fr        #
+#    Updated: 2017/12/06 11:36:36 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRC=			ft_sqrt.c \
 				\
 				ft_strcat.c \
 				ft_strncat.c \
-				ft_strlcat.c \
 				ft_strjoin.c \
 				ft_strtrim.c \
 				ft_strsplit.c \
@@ -66,7 +65,6 @@ SRC=			ft_sqrt.c \
 				\
 				ft_atoi.c \
 				ft_itoa.c \
-				ft_power_10.c \
 				\
 				ft_putnbr.c \
 				ft_putnbr_fd.c \
@@ -85,6 +83,7 @@ SRC=			ft_sqrt.c \
 				ft_lstadd.c \
 				ft_lstiter.c \
 				ft_lstmap.c \
+				ft_lstinsert.c \
 
 
 OBJ= $(SRC:.c=.o)

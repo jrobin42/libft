@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power_10.c                                      :+:      :+:    :+:   */
+/*   ft_lstinsert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/12 16:28:32 by jrobin            #+#    #+#             */
-/*   Updated: 2017/06/21 06:59:50 by jrobin           ###   ########.fr       */
+/*   Created: 2017/06/06 14:06:18 by jrobin            #+#    #+#             */
+/*   Updated: 2017/12/06 11:37:48 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_power_10(int i)
+int		ft_lstinsert(t_list *insert, t_list **lst)
 {
-	int		result;
-
-	result = 1;
-	while (i > 0)
+	t_list *tmp;
+	if (insert && lst && *lst)
 	{
-		result = result * 10;
-		i--;
+		if (ft_strlen((*lst)->content) == 0)
+			*lst = insert;
+		else
+		{
+			insert->next = (*lst)->next;
+			(*lst)->next = insert;
+		}
+		tmp = *lst;
+		return (0);
 	}
-	return (result);
+	return (1);
 }
