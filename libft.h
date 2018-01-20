@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2017/12/06 11:39:10 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/01/20 19:06:46 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
+size_t			ft_wchar_t(wchar_t *s);
+char			*ft_reverse(char *s);
+int				ft_power(int nb, int power);
 int				ft_sqrt(int nb);
 void			ft_free_tab(char **tab);
 void			*ft_memmove(void *dest, const void *src, unsigned long n);
@@ -54,6 +58,8 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_itoa(int n);
+char			*ft_itoa_base(long n, char *base);
+char			*ft_ultoa_base(unsigned long n, char *base);
 void			ft_memdel(void **ap);
 char			*ft_strnew(size_t size);
 void			ft_strdel(char **as);
@@ -87,6 +93,6 @@ void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-int				ft_lstinsert(t_list *insert, t_list **lst);
+int				lst_insert_sort(t_list *insert, t_list **lst, int (*f)());
 
 #endif

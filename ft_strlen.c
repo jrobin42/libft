@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:12:01 by jrobin            #+#    #+#             */
-/*   Updated: 2017/12/06 11:54:09 by jrobin           ###   ########.fr       */
+/*   Updated: 2017/12/06 15:50:02 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		ft_strlen(const char *str)
 	int		len;
 
 	len = 0;
-	if (len)
+	if (str)
 		while (str[len])
 			len++;
 	return (len);

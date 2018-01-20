@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstinsert.c                                     :+:      :+:    :+:   */
+/*   lst_insert_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 14:06:18 by jrobin            #+#    #+#             */
-/*   Updated: 2017/12/06 11:37:48 by jrobin           ###   ########.fr       */
+/*   Updated: 2017/12/06 19:11:51 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstinsert(t_list *insert, t_list **lst)
+int		lst_insert_sort(t_list *insert, t_list **lst, int (*f)())
 {
-	t_list *tmp;
-	if (insert && lst && *lst)
+	//if (!f || !insert || !lst || !*lst)
+	if (!f || !insert || !lst)
+		return (1);
+	while (*lst && (*lst)->content)
 	{
-		if (ft_strlen((*lst)->content) == 0)
-			*lst = insert;
-		else
+		if (*lst && f(insert->content, (*lst)->content) <= 0)
 		{
-			insert->next = (*lst)->next;
-			(*lst)->next = insert;
+			insert->next = *lst;
+			*lst = insert;
+			return (0);
 		}
-		tmp = *lst;
-		return (0);
+		lst = &((*lst)->next);
 	}
-	return (1);
+	*lst = insert;
+	return (0);
 }

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/16 21:00:56 by jrobin            #+#    #+#             */
-/*   Updated: 2017/12/06 14:27:07 by jrobin           ###   ########.fr       */
+/*   Created: 2018/01/16 14:03:44 by jrobin            #+#    #+#             */
+/*   Updated: 2018/01/16 14:30:00 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int		ft_strcmp(const char *s1, const char *s2)
+char	*ft_reverse(char *s)
 {
 	int		i;
+	int		len;
+	char	*rev;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	len = ft_strlen(s);
+	rev = (char*)malloc((len + 1) * sizeof(char));
+	while (len)
+	{
+		rev[i] = s[len - 1];
+		--len;
+		++i;
+	}
+	rev[i] = 0;
+	return (rev);
 }

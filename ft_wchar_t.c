@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/16 21:00:56 by jrobin            #+#    #+#             */
-/*   Updated: 2017/12/06 14:27:07 by jrobin           ###   ########.fr       */
+/*   Created: 2017/05/11 19:12:01 by jrobin            #+#    #+#             */
+/*   Updated: 2018/01/20 19:13:58 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "stdio.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+
+size_t		ft_wchar_t(wchar_t *s)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while (s[i])
+		++i;
+	return (i);
 }

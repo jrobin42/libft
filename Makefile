@@ -6,12 +6,13 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2017/12/06 11:36:36 by jrobin           ###   ########.fr        #
+#    Updated: 2018/01/20 19:07:27 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= libft.a
 SRC=			ft_sqrt.c \
+				ft_reverse.c \
 				ft_free_tab.c \
 				ft_memalloc.c \
 				ft_memdel.c \
@@ -28,6 +29,7 @@ SRC=			ft_sqrt.c \
 				ft_strdel.c \
 				ft_strclr.c \
 				ft_strlen.c \
+				ft_wchar_t.c \
 				\
 				ft_strcmp.c \
 				ft_strncmp.c \
@@ -65,6 +67,8 @@ SRC=			ft_sqrt.c \
 				\
 				ft_atoi.c \
 				ft_itoa.c \
+				ft_itoa_base.c \
+				ft_ultoa_base.c \
 				\
 				ft_putnbr.c \
 				ft_putnbr_fd.c \
@@ -83,7 +87,7 @@ SRC=			ft_sqrt.c \
 				ft_lstadd.c \
 				ft_lstiter.c \
 				ft_lstmap.c \
-				ft_lstinsert.c \
+				lst_insert_sort.c \
 
 
 OBJ= $(SRC:.c=.o)
