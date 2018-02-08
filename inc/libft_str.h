@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/08 05:24:01 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/08 06:22:25 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 
 # include "libft_mem.h"
 
+# define BUFF_SIZE_GNL 1500
+
+int				get_next_line(const int fd, char **line);
 char			*ft_freejoin(char *s1, char *s2, int sfr);
 char			*ft_reverse(char *s);
 void			ft_bzero(void *s, unsigned long n);

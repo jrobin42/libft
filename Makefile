@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/02/08 05:38:44 by jrobin           ###   ########.fr        #
+#    Updated: 2018/02/08 06:27:02 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			ft_int/ft_toupper.c \
 			ft_int/ft_wchar_t.c \
 			\
+			ft_str/get_next_line.c \
 			ft_str/ft_atoi.c \
 			ft_str/ft_bzero.c \
 			ft_str/ft_freejoin.c \
