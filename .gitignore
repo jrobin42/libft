@@ -1,0 +1,8 @@
+*.swp
+*.o
+*.d
+filler
+filler_vm
+*.dSYM
+obj
+hola

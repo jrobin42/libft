@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:36:08 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/02 18:11:20 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/26 14:44:01 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	type_ss(t_env *env, va_list ap)
 	tmp = option_s(s3, env);
 	s3 = tmp;
 	save_endofs(env->beg, &tmp, ft_strlen(tmp), env);
-	ft_free_tab(s2);
+	ft_free_tab((void***)&s2);
 	free(s3);
 }

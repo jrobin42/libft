@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 06:39:25 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/08 06:24:21 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/26 13:25:07 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		read_fd(int fd, char *stock, int *ret, char *line)
 {
 	if ((*ret = read(fd, stock, BUFF_SIZE_GNL)) == -1)
 		return (-1);
+	write(2, stock, *ret);
 	stock[*ret] = 0;
 	if (!(*ret) && !ft_strlen(line))
 	{
