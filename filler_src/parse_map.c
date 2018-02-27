@@ -6,60 +6,53 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/27 13:33:57 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:18:47 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int			intensity_for_each(t_map *map, int score)
+static void		intensity_for_each(t_filler *filler, int n)
 {
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	while (y < MAX_Y)
+	while (y < M_MAX_Y)
 	{
-		while (x < MAX_X)
+		while (x < M_MAX_X)
 		{
-			if ((H_MAP[y][x] == -1 && score == 0) || (H_MAP[y][x] == score && score))
+			if ((H_MAP[y][x] == -1 && !n) ||
+				(H_MAP[y][x] == n && n) || H_MAP[y][x] == -2)
 			{
-				y > 0 && H_MAP[y - 1][x] == 0 ? H_MAP[y - 1][x] = score + 1 : 0;
-				y < MAX_Y - 1 && H_MAP[y + 1][x] == 0 ? H_MAP[y + 1][x] = score + 1 : 0;
-				x > 0 && H_MAP[y][x - 1] == 0 ? H_MAP[y][x - 1] = score + 1 : 0;
-				x < MAX_X - 1 && H_MAP[y][x + 1] == 0 ? H_MAP[y][x + 1] = score + 1 : 0;
-			}
-			else if (H_MAP[y][x] == -2)
-			{
-				y > 0 && H_MAP[y - 1][x] == 0 ? H_MAP[y - 1][x] = score + 1 : 0;
-				y < MAX_Y - 1 && H_MAP[y + 1][x] == 0 ? H_MAP[y + 1][x] = score + 1 : 0;
-				x > 0 && H_MAP[y][x - 1] == 0 ? H_MAP[y][x - 1] = score + 1 : 0;
-				x < MAX_X - 1 && H_MAP[y][x + 1] == 0 ? H_MAP[y][x + 1] = score + 1 : 0;
+				y > 0 && H_MAP[y - 1][x] == 0 ? H_MAP[y - 1][x] = n + 1 : 0;
+				y < M_MAX_Y - 1 && H_MAP[y + 1][x] == 0 ?
+					H_MAP[y + 1][x] = n + 1 : 0;
+				x > 0 && H_MAP[y][x - 1] == 0 ? H_MAP[y][x - 1] = n + 1 : 0;
+				x < M_MAX_X - 1 && H_MAP[y][x + 1] == 0 ?
+					H_MAP[y][x + 1] = n + 1 : 0;
 			}
 			++x;
 		}
 		x = 0;
 		++y;
 	}
-	return (0);
 }
 
-int			heatmap_not_ready(t_map *map)
+static int		heatmap_not_ready(t_filler *filler)
 {
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	while (y < MAX_Y)
+	while (y < M_MAX_Y)
 	{
-		while (x < MAX_X)
+		while (x < M_MAX_X)
 		{
 			if (H_MAP[y][x] == 0)
-			{
 				return (1);
-			}
 			++x;
 		}
 		x = 0;
@@ -68,7 +61,7 @@ int			heatmap_not_ready(t_map *map)
 	return (0);
 }
 
-t_filler	*prepare_heatmap(t_map *map, t_filler *filler)
+void		prepare_heatmap(t_filler *filler)
 {
 	int			i;
 	int			j;
@@ -77,34 +70,30 @@ t_filler	*prepare_heatmap(t_map *map, t_filler *filler)
 	i = 0;
 	j = 0;
 	score = 0;
-	map->max_x += 1;
-	map->max_y += 1;
-	map->heatmap = ft_memalloc(map->max_y * sizeof(int*));
-	while (i < map->max_y)
+	M_MAX_X += 1;
+	M_MAX_Y += 1;
+	H_MAP = ft_memalloc(M_MAX_Y * sizeof(int*));
+	while (i < M_MAX_Y)
 	{
-		map->heatmap[i] = ft_memalloc(map->max_x * sizeof(int));
-		while (j < map->max_x)
+		H_MAP[i] = ft_memalloc(M_MAX_X * sizeof(int));
+		while (j < M_MAX_X)
 		{
-			map->heatmap[i][j] = MAP[i][j] == filler->adv_char ? -1 : -2;
-			MAP[i][j] == '.' ? map->heatmap[i][j] = 0 : 0;
+			H_MAP[i][j] = MAP[i][j] == ADV ? -1 : -2;
+			MAP[i][j] == '.' ? H_MAP[i][j] = 0 : 0;
 			++j;
 		}
 		j = 0;
 		++i;
 	}
-	i = 0;
-	while (heatmap_not_ready(map))
+	while (heatmap_not_ready(filler))
 	{
-		intensity_for_each(map, score);
+		intensity_for_each(filler, score);
 		++score;
 	}
+
 /*
-
-
-
-if (i == 0)
-
 //AFFICHAGE DEBUG
+	i = 0;
 	j = 0;
 	while (i < MAX_Y)
 	{
@@ -119,10 +108,5 @@ if (i == 0)
 		++i;
 	}
 //AFFICHAGE DEBUG fin
-
-
 */
-
-
-	return(filler);
 }

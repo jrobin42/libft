@@ -6,76 +6,66 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:21:46 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/27 13:35:14 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:53:14 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	try_place_piece(int *yx, t_piece *piece, t_map *map, t_filler *filler)
+static void		save_best_pos(t_filler *filler, int score, int x, int y);
+{
+	BEST_SCORE = score;
+	BEST_X = x - OFF_X;
+	BEST_Y = y - OFF_Y;
+}
+
+static int		is_in_map(t_filler *filler, int x, int y, int i)
+{
+	return (y + P_AXE_Y[i] - OFF_Y < M_MAX_Y &&	x + P_AXE_X[i] - OFF_X < M_MAX_X
+			&& y + P_AXE_Y[i] - OFF_Y >= 0 && x + P_AXE_X[i] - OFF_X >= 0)
+}
+
+void			try_place_piece(int x, int y, t_filler *filler)
 {
 	int		i;
+	int		current;
 	int		link;
 	long	score;
 
 	i = 0;
 	link = 0;
 	score = 0;
-	while (i < piece->nb_stars)
+	while (i < NB_STARS && link >= 0 && is_in_map(filler , x, y, i))
 	{
-		if (*yx + piece->y[i] - filler->offset_y < MAX_Y && // < 0 possible ?
-				yx[1] + piece->x[i]	- filler->offset_x < MAX_X && *yx + piece->y[i] - filler->offset_y >= 0 && // < 0 possible ?
-				yx[1] + piece->x[i]	- filler->offset_x >= 0)
-		{
-			if (H_MAP[*yx + piece->y[i] - filler->offset_y][yx[1] + piece->x[i] - filler->offset_x] == -2)
-				++link;
-			else if (H_MAP[*yx + piece->y[i] - filler->offset_y]
-					[yx[1] + piece->x[i] - filler->offset_x] == -1)
-				return ;
-			score += H_MAP[*yx + piece->y[i] - filler->offset_y]
-				[yx[1] + piece->x[i] - filler->offset_x];
-		}
+		current = H_MAP[y + P_AXE_Y[i] - OFF_Y][x + P_AXE_X[i] - OFF_X];
+		if (current == -2 || current == -1)
+			link = current == -1 ? -1 : link + 1;
 		else
-			return ;
+			score += current;
 		++i;
 	}
-	if (link == 1 && score < filler->best_score)
-	{
-		filler->best_score = score;
-		filler->not_finish = 1;
-		filler->best_x = yx[1] - filler->offset_x;
-		filler->best_y = *yx - filler->offset_y;
-	}
+	if (link != 1 || score > filler->best_score)
+		return ;
+	save_best_pos(filler, score, x, y);
 }
 
-int		search_best_pos(t_piece *piece, t_map *map, t_filler *filler)
+int		search_best_pos(t_filler *filler)
 {
 	int		x;
 	int		y;
-	int		coord[2];
 
 	x = 0;
 	y = 0;
-	filler->not_finish = 0;
-	filler->best_score = LONG_MAX; 
-	while (y < MAX_Y)
+	BEST_SCORE = LONG_MAX; 
+	while (y < M_MAX_Y)
 	{
-		while (x < MAX_X)
+		while (x < M_MAX_X)
 		{
-			coord[0] = y;
-			coord[1] = x;
-	//		dprintf(2, "y = %d x = %d MAX_X = %d\n", y, x, MAX_X);
-			try_place_piece(coord, piece, map, filler);
+			try_place_piece(x, y, filler);
 			++x;
 		}
 		x = 0;
 		++y;
 	}
-/*	if (filler->not_finish == 0)
-	{
-		dprintf(2, "iiiiiiiiiiiii%d, %d", filler->best_y, filler->best_x);
-		return (1);
-	}
-	else
-*/		return (0);
+	return (0);
 }
