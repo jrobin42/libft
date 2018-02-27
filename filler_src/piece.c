@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 09:36:06 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 19:25:45 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:34:57 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	get_coord_piece(t_piece *piece)
 	}
 }
 
-t_filler	*get_offset(t_piece *piece, t_filler *filler)
+void	get_offset(t_piece *piece, t_filler *filler)
 {
 	int			i;
 	int			x;
 
 	i = 0;
 	x = piece->max_x;
+	filler->offset_y = 0;
 	filler->offset_y = piece->y[0];
 	filler->offset_x = *(piece->x);
 	while (x + 1 && filler->offset_x)              //filler->offset_x == 0 ! 
@@ -54,7 +55,6 @@ t_filler	*get_offset(t_piece *piece, t_filler *filler)
 		piece->x[i] < filler->offset_x ? filler->offset_x = piece->x[i] : 0;
 		--x;
 	}
-	return (filler);
 }
 
 void		count_stars(t_piece *piece)
@@ -78,27 +78,25 @@ void		count_stars(t_piece *piece)
 	}
 }
 
-t_filler	*parse_piece(t_piece **piece, t_filler *filler)
+void	parse_piece(t_piece **piece, t_filler *filler, char *line)
 {
 	int			index_line;
-	char		*line;
 
 	*piece = ft_memalloc(sizeof(t_piece));
 	index_line = 0;
 	get_next_line(0, &line);
-	dprintf(2, "Coord piece {%s}\n", line);
 	(*piece)->max_y = ft_atoi(line + 6);
 	(*piece)->piece = ft_memalloc(((*piece)->max_y + 1) * sizeof(char*));
 	while (index_line < (*piece)->max_y)
 	{
 		get_next_line(0, &line);
-		dprintf(2, "piece {%s}\n", line);
-		*((*piece)->piece + index_line) = line;
+		*((*piece)->piece + index_line) = ft_strdup(line);
+		line = NULL;
 		++index_line;
 	}
 	*((*piece)->piece + index_line) = NULL;
 	(*piece)->max_x = ft_strlen(line);
 	count_stars(*piece);
 	get_coord_piece(*piece);
-	return (get_offset(*piece, filler));
+	get_offset(*piece, filler);
 }

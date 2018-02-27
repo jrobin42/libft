@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 07:34:05 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 19:23:36 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/26 19:40:27 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <fcntl.h>
 
 # include "../libft/inc/libft_str.h"
+# include "../libft/inc/libft_clear.h"
+# include "../libft/inc/ft_printf.h"
 # include <stdio.h>
 
 # define MAP map->map

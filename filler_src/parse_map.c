@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 19:25:07 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:33:57 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,31 +97,31 @@ t_filler	*prepare_heatmap(t_map *map, t_filler *filler)
 	{
 		intensity_for_each(map, score);
 		++score;
-
-
-
-
+	}
 /*
+
+
+
 if (i == 0)
 
 //AFFICHAGE DEBUG
 	j = 0;
 	while (i < MAX_Y)
 	{
+		dprintf(2, "l%d\t{", i);
 		while (j < MAX_X)
 		{
-			dprintf(2, "%3d ", H_MAP[i][j]);
+			dprintf(2, "%2d ", H_MAP[i][j]);
 			++j;
 		}
 		j = 0;
-		dprintf(2, "\n");
+		dprintf(2, "}\n");
 		++i;
 	}
 //AFFICHAGE DEBUG fin
+
+
 */
-	}
-
-
 
 
 	return(filler);

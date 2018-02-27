@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:21:46 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 19:25:55 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:35:14 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	try_place_piece(int *yx, t_piece *piece, t_map *map, t_filler *filler)
 	{
 		filler->best_score = score;
 		filler->not_finish = 1;
-		filler->best_x = yx[1]/* - filler->offset_x*/;
-		filler->best_y = *yx/* - filler->offset_y*/;
+		filler->best_x = yx[1] - filler->offset_x;
+		filler->best_y = *yx - filler->offset_y;
 	}
 }
 
@@ -64,17 +64,18 @@ int		search_best_pos(t_piece *piece, t_map *map, t_filler *filler)
 		{
 			coord[0] = y;
 			coord[1] = x;
+	//		dprintf(2, "y = %d x = %d MAX_X = %d\n", y, x, MAX_X);
 			try_place_piece(coord, piece, map, filler);
 			++x;
 		}
 		x = 0;
 		++y;
 	}
-	if (filler->not_finish == 0)
+/*	if (filler->not_finish == 0)
 	{
-		//		ft_printf("%d, %d", filler->best_y, filler->best_x);
+		dprintf(2, "iiiiiiiiiiiii%d, %d", filler->best_y, filler->best_x);
 		return (1);
 	}
 	else
-		return (0);
+*/		return (0);
 }

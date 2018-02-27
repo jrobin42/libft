@@ -6,54 +6,42 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 19:24:40 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:12:39 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	parse_map(t_map *map)
+char	*parse_map(t_map *map)
 {
 	int		index_line;
 	char	*line;
-	int 	ret;
+	int ret = 0;
 
 	index_line = 0;
-	ret = 1;
 	line = NULL;
-	while (get_next_line(0, &line) > 0)
-	{
-		dprintf(2, "Taille plateau {%s}\n", line);
-		if (ft_strstr(line, "Plateau"))
-		{
-			map->max_y = ft_atoi(line + 8);
-			break;
-		}
-	}
+	ret = get_next_line(0, &line); 
+	map->max_y = ft_atoi(line + 8);
 	MAP = ft_memalloc((map->max_y + 1) * sizeof(char*));
 	get_next_line(0, &line);
-	dprintf(2, "ordonnes {%s}\n", line);
 	while (index_line < map->max_y)
 	{
-		if (get_next_line(0, &line) == 0)
-		{
-			break;
-		}
-		dprintf(2, "map {%s}\n", line);
-		*(MAP + index_line) = line + 4;
+		ret = get_next_line(0, &line);
+		*(MAP + index_line) = ft_strdup(line + 4);	//attention leaks, je perd l'adresse initiale de line
 		++index_line;
 	}
 	*(MAP + index_line) = NULL;
 	map->max_x = ft_strlen(*MAP) - 1;
 	map->max_y = map->max_y - 1;
+	return (line);
 }
 
 void	get_char_player(t_filler *filler)
 {
 	char	*line;
 
+	line = NULL;
 	get_next_line(0, &line);
-	dprintf(2, "Char player {%s}\n", line);
 	filler->my_char = *(line + 10) == '1' ? 'O' : 'X';
 	filler->adv_char = filler->my_char == 'X' ? 'O' : 'X';
 }
@@ -79,46 +67,49 @@ void	free_map(char **map)
 
 void	free_all(t_piece *piece, t_map *map)
 {
-	free_map((map->map));
-	ft_free_tab((void***)&(map->heatmap));
+	(void)map;
+	//	free_map((map->map));
+	//free(map->map);
+//	ft_free_tab((void***)&(map->heatmap));
 	ft_free_tab((void***)&(piece->piece));
-	free(piece->x);
-	free(piece->y);
-	free(piece);
+//	free(piece->x);
+//	free(piece->y);
+//	free(piece);
 }
+
+#define RED "\e[31m"
+#define EOC "\e[0m"
 
 int		main(void)
 {
-/*	t_piece		*piece;
+	t_piece		*piece;
 	t_map		map;
-	t_filler	*filler;
+	t_filler	filler;
+	char		*line;
 
-	filler = ft_memalloc(sizeof(*filler));
-	get_char_player(filler);
-//	while (1)
-//	{
-		parse_map(&map);
-		filler = parse_piece(&piece, filler);
-		prepare_heatmap(&map, filler);
-		if (!search_best_pos(piece, &map, filler)) //attention virer le !
-//			break ;
-//		else
-			ft_printf("%d %d\n", filler->best_y, filler->best_x);
-//		free_all(piece, &map);
-		sleep(5);
-//	}
-		parse_map(&map);
-		filler = parse_piece(&piece, filler);
-		prepare_heatmap(&map, filler);
-		if (!search_best_pos(piece, &map, filler))
-	//		break ;
-//		else
-			ft_printf("%d %d\n", filler->best_y, filler->best_x);
+	get_char_player(&filler);
+	while (1)
+	{
+		line = parse_map(&map);
+		parse_piece(&piece, &filler, line);
+		prepare_heatmap(&map, &filler);
+		if (search_best_pos(piece, &map, &filler))
+		{
+			dprintf(2, "\t\tBREAK\n");
+			break ;
+		}
+		ft_printf("%d %d\n", filler.best_y, filler.best_x);
 		free_all(piece, &map);
-		sleep(5);
-
-	free_all(piece, &map);
-	free(filler);*/
-//	ft_printf("3 3\n");
+	}
+	/*	ft_printf("3 3\n");
+		char *line;
+		int i = 30;
+		while (i)
+		{
+		get_next_line(0, &line);
+		dprintf(2, "LINE {%s}\n", line);
+		--i;
+		}*/
+	ft_printf("0, 0\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 07:34:05 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/26 16:38:14 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:51:12 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 #include <fcntl.h>
 
 
-//# include "libft_str.h"
-# include "../libft/libft.h"
-# include "../libft/ft_printf.h"
+# include "libft_str.h"
+# include "../libft/inc/ft_printf.h"
 # include <stdio.h>
 
 # define MAP map->map
@@ -58,7 +57,7 @@ typedef struct	s_filler
 	char		adv_char;
 }				t_filler;
 
-t_filler		*parse_piece(t_piece **piece, t_filler *filler);
+void			parse_piece(t_piece **piece, t_filler *filler, char *line);
 t_filler		*prepare_heatmap(t_map *map, t_filler *filler);
 int				search_best_pos(t_piece *piece, t_map *map, t_filler *filler);
 
