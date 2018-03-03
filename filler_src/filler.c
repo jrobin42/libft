@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/27 17:21:13 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/03 18:17:08 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ char	*parse_map(t_filler *filler)
 	while (index_line < M_MAX_Y)
 	{
 		ret = get_next_line(0, &line);
-		*(MAP + index_line) = ft_strdup(line + 4);	//attention leaks, je perd l'adresse initiale de line
+		*(MAP + index_line) = line + 4;
 		++index_line;
 	}
 	*(MAP + index_line) = NULL;
-	M_MAX_X = ft_strlen(*MAP) - 1;
-	M_MAX_Y = M_MAX_Y - 1;
+	M_MAX_X = ft_strlen(*MAP);
 	return (line);
 }
 
@@ -67,47 +66,32 @@ void	free_map(char **map)
 
 void	free_all(t_filler *filler)
 {
-	(void)filler;
-	//	free_map((map->map));
-	//free(map->map);
-//	ft_free_tab((void***)&(map->heatmap));
-//	ft_free_tab((void***)&(piece->piece));
-//	free(piece->x);
-//	free(piece->y);
-//	free(piece);
+	free_map(MAP);
+//	ft_free_tab((void***)&(H_MAP));
+	ft_free_tab((void***)&(PIECE));
+	free(P_AXE_X);
+	free(P_AXE_Y);
 }
-
-#define RED "\e[31m"
-#define EOC "\e[0m"
 
 int		main(void)
 {
 	t_filler	filler;
 	char		*line;
 
+	ft_bzero(&filler, sizeof(filler));
 	get_char_player(&filler);
+	//init
 	while (1)
 	{
 		line = parse_map(&filler);
 		parse_piece(&filler);
 		prepare_heatmap(&filler);
 		if (search_best_pos(&filler))
-		{
-			dprintf(2, "\t\tBREAK\n");
 			break ;
-		}
 		ft_printf("%d %d\n", filler.best_y, filler.best_x);
 		free_all(&filler);
 	}
-	/*	ft_printf("3 3\n");
-		char *line;
-		int i = 30;
-		while (i)
-		{
-		get_next_line(0, &line);
-		dprintf(2, "LINE {%s}\n", line);
-		--i;
-		}*/
-	ft_printf("0, 0\n");
+	//free
+	free_all(&filler);
 	return (0);
 }

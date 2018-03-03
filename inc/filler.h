@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 07:34:05 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/27 17:59:18 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/02/27 22:33:41 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ typedef struct	s_map
 # define P_MAX_X filler->piece.max_x
 # define P_MAX_Y filler->piece.max_y
 # define NB_STARS filler->piece.nb_stars
-# define P_AXE_X filler->piece.axe_x[0]
-# define P_AXE_Y filler->piece.axe_y[0]
-		# define P_AXE_X filler->piece.axe_x
-		# define P_AXE_Y filler->piece.axe_y
+# define P_AXE_X filler->piece.axe_x
+# define P_AXE_Y filler->piece.axe_y
 
 typedef struct	s_piece
 {
@@ -77,7 +75,7 @@ typedef struct	s_filler
 }				t_filler;
 
 void			parse_piece(t_filler *filler);
-t_filler		*prepare_heatmap(t_filler *filler);
+void			prepare_heatmap(t_filler *filler);
 int				search_best_pos(t_filler *filler);
 
 #endif
