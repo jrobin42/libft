@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 07:34:05 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/27 22:33:41 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:26:42 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ typedef struct	s_filler
 	t_map		map;
 }				t_filler;
 
-void			parse_piece(t_filler *filler);
-void			prepare_heatmap(t_filler *filler);
+int				parse_piece(t_filler *filler);
+int				parse_map(t_filler *filler);
+int				prepare_heatmap(t_filler *filler);
 int				search_best_pos(t_filler *filler);
 
 #endif

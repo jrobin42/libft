@@ -6,43 +6,22 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 11:11:38 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:30:53 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-char	*parse_map(t_filler *filler)
-{
-	int		index_line;
-	char	*line;
-	int ret = 0;
-
-	index_line = 0;
-	line = NULL;
-	ret = get_next_line(0, &line); 
-	M_MAX_Y = ft_atoi(line + 8);
-	MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(char*));
-	get_next_line(0, &line);
-	while (index_line < M_MAX_Y)
-	{
-		ret = get_next_line(0, &line);
-		*(MAP + index_line) = line + 4;
-		++index_line;
-	}
-	*(MAP + index_line) = NULL;
-	M_MAX_X = ft_strlen(*MAP);
-	return (line);
-}
-
-void	get_char_player(t_filler *filler)
+int		get_char_player(t_filler *filler)
 {
 	char	*line;
 
 	line = NULL;
-	get_next_line(0, &line);
+	if (get_next_line(0, &line) == -1)
+		return (-1);
 	filler->my_char = *(line + 10) == '1' ? 'O' : 'X';
 	filler->adv_char = filler->my_char == 'X' ? 'O' : 'X';
+	return (0);
 }
 
 void	free_map(char **map)
@@ -64,35 +43,64 @@ void	free_map(char **map)
 	}
 }
 
-void	free_all(t_filler *filler)
+void	free_all(t_filler *filler, int i)
 {
-	free_map(MAP);
-//	ft_free_tab((void***)&(H_MAP));
-	ft_free_tab((void***)&(PIECE));
-	free(P_AXE_X);
-	free(P_AXE_Y);
+	if (i < -1)
+	{
+		free_map(MAP);
+		if (i < -2)
+		{
+			ft_free_tab((void***)&(PIECE));
+			if (i < -3)
+			{
+				free(P_AXE_X);
+				if (i < -4)
+				{
+					free(P_AXE_Y);
+					if (i < -5)
+					{
+						ft_free_tab((void***)&(H_MAP));
+					}
+				}
+			}
+		}
+	}
+}
+
+int		parse(t_filler *filler)
+{
+	int		ret;
+
+	if ((ret = parse_map(filler)) < 0 ||
+		(ret = parse_piece(filler)) < 0 ||
+		(ret = prepare_heatmap(filler)) < 0)
+	{
+		free_all(filler, ret);
+		return (-1);
+	}
+	return (0);
 }
 
 int		main(void)
 {
+	int			ret;
 	t_filler	filler;
-	char		*line;
 
 	ft_bzero(&filler, sizeof(filler));
-	get_char_player(&filler);
-	//init
+	if (get_char_player(&filler) == -1)
+		return (-1);
 	while (1)
 	{
-		line = parse_map(&filler);
-		parse_piece(&filler);
-		prepare_heatmap(&filler);
-		if (search_best_pos(&filler))
+		if (parse(&filler) == -1)
+			return (-1);
+		if ((ret = search_best_pos(&filler)) == 1)
 			break ;
+		else if (ret == -1)
+			return (-1);
 		ft_printf("%d %d\n", filler.best_y, filler.best_x);
-		free_all(&filler);
+		free_all(&filler, -6);
 	}
-	//free
-		ft_printf("0 0\n");
-	free_all(&filler);
+	ft_printf("0 0\n");
+	free_all(&filler, -6);
 	return (0);
 }

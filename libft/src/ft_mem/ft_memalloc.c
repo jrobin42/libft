@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:07:10 by jrobin            #+#    #+#             */
-/*   Updated: 2018/01/30 06:53:11 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 14:24:38 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memalloc(size_t size)
 	void			*tab;
 
 	if (!(tab = (void *)malloc(size)))
-		exit(1);
+		return (NULL);
 	ft_bzero(tab, size);
 	return (tab);
 }

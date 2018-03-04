@@ -6,25 +6,27 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 09:36:06 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 11:09:08 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:18:38 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	get_coord_piece(t_filler *filler)
+static int		get_coord_piece(t_filler *filler)
 {
 	int			i;
 	int			x;
 	int			y;
 
+	if ((P_AXE_X = ft_memalloc(NB_STARS * sizeof(*P_AXE_X))) == NULL)
+		return (-3);
+	if ((P_AXE_Y = ft_memalloc(NB_STARS * sizeof(*P_AXE_Y))) == NULL)
+		return (-4);
 	i = 0;
-	x = 0;
 	y = 0;
-	P_AXE_X = ft_memalloc(NB_STARS * sizeof(*P_AXE_X));
-	P_AXE_Y = ft_memalloc(NB_STARS * sizeof(*P_AXE_Y));
 	while (PIECE[y])										//et nb_stars != i (?)
 	{
+		x = 0;
 		while (PIECE[y][x])
 		{
 			if (PIECE[y][x] == '*')
@@ -35,12 +37,12 @@ void	get_coord_piece(t_filler *filler)
 			}
 			++x;
 		}
-		x = 0;
 		++y;
 	}
+	return (0);
 }
 
-void	get_offset(t_filler *filler)
+static void		get_offset(t_filler *filler)
 {
 	int			i;
 	int			x;
@@ -56,7 +58,7 @@ void	get_offset(t_filler *filler)
 	}
 }
 
-void		count_stars(t_filler *filler)
+static void		count_stars(t_filler *filler)
 {
 	int		i;
 	int		j;
@@ -77,26 +79,31 @@ void		count_stars(t_filler *filler)
 	}
 }
 
-void	parse_piece(t_filler *filler)
+int			parse_piece(t_filler *filler)
 {
+	int			ret;
 	int			index_line;
 	char		*line;
 
-//	*piece = ft_memalloc(sizeof(t_piece));
 	index_line = 0;
-	get_next_line(0, &line);
+	if (get_next_line(0, &line) == -1)
+		return (-2);
 	P_MAX_Y = ft_atoi(line + 6);
-	PIECE = ft_memalloc((P_MAX_Y + 1) * sizeof(char*));
+	if ((PIECE = ft_memalloc((P_MAX_Y + 1) * sizeof(char*))) == NULL)
+		return (-2);
 	while (index_line < P_MAX_Y)
 	{
-		get_next_line(0, &line);
-		*(PIECE + index_line) = ft_strdup(line);
+		if (get_next_line(0, &line) == -1)
+			return (-3);
+		*(PIECE + index_line) = /*ft_strdup(*/line/*)*/;
 		line = NULL;
 		++index_line;
 	}
 	*(PIECE + index_line) = NULL;
 	P_MAX_X = ft_strlen(line);
 	count_stars(filler);
-	get_coord_piece(filler);
+	if ((ret = get_coord_piece(filler)) < 0)
+		return (ret);
 	get_offset(filler);
+	return (0);
 }

@@ -6,11 +6,37 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 10:57:49 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:26:49 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+int		parse_map(t_filler *filler)
+{
+	int		index_line;
+	char	*line;
+
+	index_line = 0;
+	line = NULL;
+	if (get_next_line(0, &line) == -1) 
+		return (-1);
+	M_MAX_Y = ft_atoi(line + 8);
+	if ((MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(char*))) == NULL)
+		return (-1);
+	if (get_next_line(0, &line) == -1)
+		return (-2);
+	while (index_line < M_MAX_Y)
+	{
+		if (get_next_line(0, &line) == -1)
+			return (-2);
+		*(MAP + index_line) = line + 4;
+		++index_line;
+	}
+	*(MAP + index_line) = NULL;
+	M_MAX_X = ft_strlen(*MAP);
+	return (0);
+}
 
 static void		intensity_for_each(t_filler *filler, int n)
 {
@@ -61,7 +87,7 @@ static int		heatmap_not_ready(t_filler *filler)
 	return (0);
 }
 
-void		place_player(int value, char player, t_filler *filler)
+static void		place_player(int value, char player, t_filler *filler)
 {
 	int		i;
 	int		j;
@@ -80,7 +106,7 @@ void		place_player(int value, char player, t_filler *filler)
 	}
 }
 
-void		prepare_heatmap(t_filler *filler)
+int		prepare_heatmap(t_filler *filler)
 {
 	int			i;
 	int			j;
@@ -89,12 +115,12 @@ void		prepare_heatmap(t_filler *filler)
 	i = 0;
 	j = 0;
 	score = 0;
-//	M_MAX_X += 1;
-//	M_MAX_Y += 1;
-	H_MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(int*));
+	if ((H_MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(int*))) == NULL)
+		return (-5);
 	while (i < M_MAX_Y)
 	{
-		H_MAP[i] = ft_memalloc(M_MAX_X * sizeof(int));
+		if ((H_MAP[i] = ft_memalloc(M_MAX_X * sizeof(int))) == NULL)
+			return (-6);
 		++i;
 	}
 	place_player(-1, ADV, filler);
@@ -104,23 +130,5 @@ void		prepare_heatmap(t_filler *filler)
 		++score;
 	}
 	place_player(-2, ME, filler);
-
-/*
-//AFFICHAGE DEBUG
-	i = 0;
-	j = 0;
-	while (i < M_MAX_Y)
-	{
-		dprintf(2, "l%d\t{", i);
-		while (j < M_MAX_X)
-		{
-			dprintf(2, "%2d ", H_MAP[i][j]);
-			++j;
-		}
-		j = 0;
-		dprintf(2, "}\n");
-		++i;
-	}
-//AFFICHAGE DEBUG fin
-*/
+	return (0);
 }
