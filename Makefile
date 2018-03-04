@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/03/04 13:02:49 by jrobin           ###   ########.fr        #
+#    Updated: 2018/03/04 13:19:40 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,14 @@ SRC_BASE= filler.c \
 OBJS= $(addprefix $(DIR_OBJ), $(SRC_BASE:.c=.o))
 
 all: $(LIB)
-	echo $(LIB)
 	@make -j $(NAME)
 
 $(LIB):
-	make -C libft
+	@make -C libft
 
 $(NAME): $(LIB) $(DIR_OBJ) $(OBJS) Makefile
-	$(CC) $(FLAGS) $(OBJS) $(PATH_LIB)$(NAME_LIB) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(PATH_LIB)$(NAME_LIB) -o $(NAME)
+	@echo "\033[32mjrobin.filler ok\033[0m"
 
 DEBUG: 
 	@echo $(OBJS)
@@ -51,14 +51,14 @@ $(DIR_OBJ):
 		@mkdir -p $(dir $(OBJS))
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c Makefile
-	$(CC) $(FLAGS) -I $(PATH_INC) -I $(PATH_LIB)$(PATH_INC) -MMD -c $< -o $@  
+	@$(CC) $(FLAGS) -I $(PATH_INC) -I $(PATH_LIB)$(PATH_INC) -MMD -c $< -o $@  
 
 clean:
-	make clean -C $(PATH_LIB)
+	@make clean -C $(PATH_LIB)
 	@rm -rf $(DIR_OBJ)
 
 fclean: clean
-	rm -f $(LIB)
+	@rm -f $(LIB)
 	@rm -f $(NAME)
 
 re: fclean all

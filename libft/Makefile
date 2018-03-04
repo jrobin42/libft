@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/03/04 12:45:36 by jrobin           ###   ########.fr        #
+#    Updated: 2018/03/04 13:19:44 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,26 +125,27 @@ INC=		libft.h
 OBJS= $(addprefix $(DIR_OBJ), $(SRC_BASE:.c=.o))
 
 all:
-	make -j $(NAME)
+	@make -j $(NAME)
+	@echo "\033[32mlibft ok\033[0m"
 
-$(NAME): $(DIR_OBJ) $(OBJS)
-	ar rc $(NAME) $(OBJS)
+$(NAME): $(DIR_OBJ) $(OBJS) Makefile
+	@ar rc $(NAME) $(OBJS)
 
 DEBUG: 
 	@echo $(OBJS)
 
 $(DIR_OBJ):
-		mkdir -p $(DIR_OBJ)
-		mkdir -p $(dir $(OBJS))
+	@mkdir -p $(DIR_OBJ)
+	@mkdir -p $(dir $(OBJS))
 
-$(DIR_OBJ)%.o: $(DIR_SRC)%.c
-	$(CC) $(FLAGS) -I inc/ -MMD -c $< -o $@  
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c Makefile
+	@$(CC) $(FLAGS) -I inc/ -MMD -c $< -o $@  
 
 clean:
-	rm -rf $(DIR_OBJ)
+	@rm -rf $(DIR_OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
