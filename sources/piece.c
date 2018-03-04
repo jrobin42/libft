@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 09:36:06 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:36:34 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 17:03:18 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ int			parse_piece(t_filler *filler)
 	char		*line;
 
 	index_line = 0;
-	if (get_next_line(0, &line) == -1)
+	if (get_next_line(0, &line) != 1)
 		return (-2);
 	P_MAX_Y = ft_atoi(line + 6);
 	if ((PIECE = ft_memalloc((P_MAX_Y + 1) * sizeof(char*))) == NULL)
 		return (-2);
 	while (index_line < P_MAX_Y)
 	{
-		if (get_next_line(0, &line) == -1)
+		if (get_next_line(0, &line) != 1)
 			return (-3);
 		*(PIECE + index_line) = line;
 		++index_line;

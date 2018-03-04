@@ -6,11 +6,11 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 15:57:53 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/16 16:06:54 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 17:04:27 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned	ft_absolute(int n)	
+unsigned	ft_absolute(int n)
 {
 	return ((unsigned)(n < 0 ? -n : n));
 }

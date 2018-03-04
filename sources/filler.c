@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:34:30 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 17:12:11 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int		get_char_player(t_filler *filler)
 {
 	char	*line;
 
-	line = NULL;
-	if (get_next_line(0, &line) == -1)
+	if (get_next_line(0, &line) != 1)
 		return (-1);
+	if (ft_strlen(line) < 20 || (*(line + 10) != '1' && *(line + 10) != '2'))
+		return (-2);
 	filler->my_char = *(line + 10) == '1' ? 'O' : 'X';
 	filler->adv_char = filler->my_char == 'X' ? 'O' : 'X';
 	return (0);
@@ -87,8 +88,8 @@ int		main(void)
 	t_filler	filler;
 
 	ft_bzero(&filler, sizeof(filler));
-	if (get_char_player(&filler) == -1)
-		return (-1);
+	if ((ret = get_char_player(&filler)) < 0)
+		return (ret);
 	while (1)
 	{
 		if (parse(&filler) == -1)

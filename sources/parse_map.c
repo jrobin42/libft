@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:34:22 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 16:26:35 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@ int				parse_map(t_filler *filler)
 	int		index_line;
 	char	*line;
 
-	index_line = 0;
+	index_line = -1;
 	line = NULL;
-	if (get_next_line(0, &line) == -1)
+	if (get_next_line(0, &line) != 1)
+		return (-1);
+	if (ft_strlen(line) < 9)
 		return (-1);
 	M_MAX_Y = ft_atoi(line + 8);
 	if ((MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(char*))) == NULL)
 		return (-1);
-	if (get_next_line(0, &line) == -1)
+	if (get_next_line(0, &line) != 1)
 		return (-2);
-	while (index_line < M_MAX_Y)
+	while (++index_line < M_MAX_Y)
 	{
-		if (get_next_line(0, &line) == -1)
+		if (get_next_line(0, &line) != 1)
+			return (-2);
+		if (ft_strlen(line) < 5)
 			return (-2);
 		*(MAP + index_line) = line + 4;
-		++index_line;
 	}
 	*(MAP + index_line) = NULL;
 	M_MAX_X = ft_strlen(*MAP);
