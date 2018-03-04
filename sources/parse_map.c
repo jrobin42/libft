@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/03 19:13:22 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 10:57:49 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		intensity_for_each(t_filler *filler, int n)
 		while (x < M_MAX_X)
 		{
 			if ((H_MAP[y][x] == -1 && n == 0) ||
-				(H_MAP[y][x] == n && n)/* || H_MAP[y][x] == -2*/)
+				(H_MAP[y][x] == n && n))
 			{
 				y > 0 && H_MAP[y - 1][x] == 0 ? H_MAP[y - 1][x] = n + 1 : 0;
 				y < M_MAX_Y - 1 && H_MAP[y + 1][x] == 0 ?
@@ -89,32 +89,12 @@ void		prepare_heatmap(t_filler *filler)
 	i = 0;
 	j = 0;
 	score = 0;
-	M_MAX_X += 1;
-	M_MAX_Y += 1;
+//	M_MAX_X += 1;
+//	M_MAX_Y += 1;
 	H_MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(int*));
 	while (i < M_MAX_Y)
 	{
 		H_MAP[i] = ft_memalloc(M_MAX_X * sizeof(int));
-//		ft_memset(H_MAP[i], 0, M_MAX_X);
-int r, v;
-	r = 0;
-	v = 0;
-	while (r <= i)
-	{
-		dprintf(2, "whatplop l%d\t{", r);
-		while (v < M_MAX_X)
-		{
-			dprintf(2, "%2d ", H_MAP[r][v]);
-			++v;
-		}
-		v = 0;
-		dprintf(2, "}\n");
-		++r;
-	}
-
-	dprintf(2, "\n");
-
-
 		++i;
 	}
 	place_player(-1, ADV, filler);

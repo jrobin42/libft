@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/03 18:17:08 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 11:11:38 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		main(void)
 		free_all(&filler);
 	}
 	//free
+		ft_printf("0 0\n");
 	free_all(&filler);
 	return (0);
 }
