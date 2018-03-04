@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:03:08 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/08 05:21:34 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 19:07:37 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdio.h>
-
 # include "libft_int.h"
 # include "libft_str.h"
 # include "libft_mem.h"
 # include "libft_put.h"
-
 
 # define BUFF_SIZE 400
 

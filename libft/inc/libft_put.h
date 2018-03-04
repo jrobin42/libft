@@ -6,16 +6,16 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2018/02/08 05:21:13 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 19:06:49 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_PUT_H
 # define LIBFT_PUT_H
 
-# include "libft_str.h" 
-# include "libft_clear.h" 
-# include <stdlib.h> 
+# include "libft_str.h"
+# include "libft_clear.h"
+# include <stdlib.h>
 
 void			ft_putchar(char c);
 void			ft_putstr(char const *str);

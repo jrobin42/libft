@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/03/04 13:19:40 by jrobin           ###   ########.fr        #
+#    Updated: 2018/03/04 19:10:09 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,9 @@ PATH_LIB= libft/
 LIB = $(PATH_LIB)$(NAME_LIB)
 
 PATH_INC= inc/
-INC=libft.h
 
 CC=		gcc
-FLAGS=	-Wall -Wextra -Werror -fsanitize=address
+FLAGS=	-Wall -Wextra -Werror
 
 DIR_SRC:= sources/
 DIR_OBJ:= obj/
