@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:32:43 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 17:12:11 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:10:26 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int		get_char_player(t_filler *filler)
 	if (get_next_line(0, &line) != 1)
 		return (-1);
 	if (ft_strlen(line) < 20 || (*(line + 10) != '1' && *(line + 10) != '2'))
+	{
+		free(line);
 		return (-2);
+	}
 	filler->my_char = *(line + 10) == '1' ? 'O' : 'X';
 	filler->adv_char = filler->my_char == 'X' ? 'O' : 'X';
+	free(line);
 	return (0);
 }
 
@@ -72,7 +76,7 @@ int		parse(t_filler *filler)
 {
 	int		ret;
 
-	if ((ret = parse_map(filler)) < 0 ||
+	if ((ret = parse_map(filler, -1, NULL)) < 0 ||
 		(ret = parse_piece(filler)) < 0 ||
 		(ret = prepare_heatmap(filler)) < 0)
 	{

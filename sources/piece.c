@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 09:36:06 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 17:03:18 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:31:03 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		get_coord_piece(t_filler *filler)
 	int			x;
 	int			y;
 
-	if ((P_AXE_X = ft_memalloc(NB_STARS * sizeof(*P_AXE_X))) == NULL)
+	if ((P_AXE_X = ft_memalloc((NB_STARS) * sizeof(*P_AXE_X))) == NULL)
 		return (-3);
-	if ((P_AXE_Y = ft_memalloc(NB_STARS * sizeof(*P_AXE_Y))) == NULL)
+	if ((P_AXE_Y = ft_memalloc((NB_STARS) * sizeof(*P_AXE_Y))) == NULL)
 		return (-4);
 	i = 0;
 	y = 0;
@@ -32,8 +32,7 @@ static int		get_coord_piece(t_filler *filler)
 			if (PIECE[y][x] == '*')
 			{
 				P_AXE_X[i] = x;
-				P_AXE_Y[i] = y;
-				++i;
+				P_AXE_Y[i++] = y;
 			}
 			++x;
 		}
@@ -51,7 +50,7 @@ static void		get_offset(t_filler *filler)
 	x = P_MAX_X;
 	OFF_Y = *P_AXE_Y;
 	OFF_X = *P_AXE_X;
-	while (x + 1 && OFF_X) 
+	while (x + 1 && OFF_X)
 	{
 		P_AXE_X[i] < OFF_X ? OFF_X = P_AXE_X[i] : 0;
 		--x;
@@ -79,7 +78,7 @@ static void		count_stars(t_filler *filler)
 	}
 }
 
-int			parse_piece(t_filler *filler)
+int				parse_piece(t_filler *filler)
 {
 	int			ret;
 	int			index_line;
@@ -89,6 +88,7 @@ int			parse_piece(t_filler *filler)
 	if (get_next_line(0, &line) != 1)
 		return (-2);
 	P_MAX_Y = ft_atoi(line + 6);
+	free(line);
 	if ((PIECE = ft_memalloc((P_MAX_Y + 1) * sizeof(char*))) == NULL)
 		return (-2);
 	while (index_line < P_MAX_Y)

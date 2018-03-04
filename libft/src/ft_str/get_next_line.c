@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 06:39:25 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 17:09:49 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:07:36 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ int		is_nl(char *stock, int i, char **line, int ret)
 
 int		read_fd(int fd, char *stock, int *ret, char *line)
 {
-	int		ret_tmp;
-
-	ret_tmp = 0;
 	if ((*ret = read(fd, stock, BUFF_SIZE_GNL)) == -1)
 		return (-1);
 	stock[*ret] = 0;

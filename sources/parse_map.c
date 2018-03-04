@@ -6,37 +6,33 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 16:26:35 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:13:26 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int				parse_map(t_filler *filler)
+int				parse_map(t_filler *filler, int index_line, char *line)
 {
-	int		index_line;
-	char	*line;
-
-	index_line = -1;
-	line = NULL;
-	if (get_next_line(0, &line) != 1)
+	if (get_next_line(0, &line) != 1 || ft_strlen(line) < 9)
+	{
+		ft_strdel(&line);
 		return (-1);
-	if (ft_strlen(line) < 9)
-		return (-1);
+	}
 	M_MAX_Y = ft_atoi(line + 8);
+	free(line);
 	if ((MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(char*))) == NULL)
 		return (-1);
 	if (get_next_line(0, &line) != 1)
 		return (-2);
+	free(line);
 	while (++index_line < M_MAX_Y)
-	{
 		if (get_next_line(0, &line) != 1)
 			return (-2);
-		if (ft_strlen(line) < 5)
+		else if (ft_strlen(line) < 5)
 			return (-2);
-		*(MAP + index_line) = line + 4;
-	}
-	*(MAP + index_line) = NULL;
+		else
+			*(MAP + index_line) = line + 4;
 	M_MAX_X = ft_strlen(*MAP);
 	return (0);
 }

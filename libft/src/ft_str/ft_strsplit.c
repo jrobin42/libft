@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 04:27:27 by jrobin            #+#    #+#             */
-/*   Updated: 2018/01/30 02:28:01 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:06:51 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 static char		**ft_malloc_tab(const char *str, char c, int i)
 {
 	char	**tab;
-	int		mot;
-	int		j;
 	int		nb_de_mots;
 
-	j = 0;
-	mot = -1;
 	nb_de_mots = 0;
 	while (str[i])
 	{

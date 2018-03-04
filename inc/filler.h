@@ -6,18 +6,16 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 07:34:05 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:26:42 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:31:43 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "libft_str.h"
 # include "../libft/inc/ft_printf.h"
 # include <stdio.h>
@@ -38,9 +36,9 @@ typedef struct	s_map
 # define PIECE filler->piece.piece
 # define P_MAX_X filler->piece.max_x
 # define P_MAX_Y filler->piece.max_y
-# define NB_STARS filler->piece.nb_stars
-# define P_AXE_X filler->piece.axe_x
-# define P_AXE_Y filler->piece.axe_y
+# define NB_STARS (filler->piece.nb_stars)
+# define P_AXE_X (filler->piece.axe_x)
+# define P_AXE_Y (filler->piece.axe_y)
 
 typedef struct	s_piece
 {
@@ -75,7 +73,7 @@ typedef struct	s_filler
 }				t_filler;
 
 int				parse_piece(t_filler *filler);
-int				parse_map(t_filler *filler);
+int				parse_map(t_filler *filler, int index_line, char *line);
 int				prepare_heatmap(t_filler *filler);
 int				search_best_pos(t_filler *filler);
 
