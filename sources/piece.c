@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 09:36:06 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:18:38 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:36:34 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		get_coord_piece(t_filler *filler)
 		return (-4);
 	i = 0;
 	y = 0;
-	while (PIECE[y])										//et nb_stars != i (?)
+	while (PIECE[y])
 	{
 		x = 0;
 		while (PIECE[y][x])
@@ -95,8 +95,7 @@ int			parse_piece(t_filler *filler)
 	{
 		if (get_next_line(0, &line) == -1)
 			return (-3);
-		*(PIECE + index_line) = /*ft_strdup(*/line/*)*/;
-		line = NULL;
+		*(PIECE + index_line) = line;
 		++index_line;
 	}
 	*(PIECE + index_line) = NULL;

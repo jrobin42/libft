@@ -6,20 +6,20 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 08:29:07 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:26:49 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:34:22 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		parse_map(t_filler *filler)
+int				parse_map(t_filler *filler)
 {
 	int		index_line;
 	char	*line;
 
 	index_line = 0;
 	line = NULL;
-	if (get_next_line(0, &line) == -1) 
+	if (get_next_line(0, &line) == -1)
 		return (-1);
 	M_MAX_Y = ft_atoi(line + 8);
 	if ((MAP = ft_memalloc((M_MAX_Y + 1) * sizeof(char*))) == NULL)
@@ -106,7 +106,7 @@ static void		place_player(int value, char player, t_filler *filler)
 	}
 }
 
-int		prepare_heatmap(t_filler *filler)
+int				prepare_heatmap(t_filler *filler)
 {
 	int			i;
 	int			j;

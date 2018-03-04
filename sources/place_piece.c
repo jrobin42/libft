@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:21:46 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 15:08:39 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:34:43 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void			try_place_piece(int x, int y, t_filler *filler)
 	save_best_pos(filler, score, x, y);
 }
 
-int		search_best_pos(t_filler *filler)
+int				search_best_pos(t_filler *filler)
 {
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	BEST_SCORE = LONG_MAX; 
+	BEST_SCORE = LONG_MAX;
 	while (y < M_MAX_Y)
 	{
 		while (x < M_MAX_X)
