@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/05 18:35:33 by jrobin           ###   ########.fr       */
+/*   Created: 2017/03/05 18:28:22 by jrobin            #+#    #+#             */
+/*   Updated: 2018/03/05 18:39:31 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_TYPE_H
-# define LIBFT_TYPE_H
+#include "libft_type.h"
 
-int				ft_isalpha(int i);
-int				ft_isdigit(int i);
-int				ft_isalnum(int i);
-int				ft_isascii(int c);
-int				ft_isprint(int c);
-int				ft_islower(int c);
-int				ft_isupper(int c);
-int				ft_isspace(char c);
-int				ft_isint(char *s);
+int		ft_isint(char *s)
+{
+	int		i;
 
-#endif
+	if (s)
+	{
+		i = 0;
+		while (*(s + i) && ft_isspace(*(s + i)) &&
+				(*(s + i) == '+' || *(s + i) == '-'))
+			++i;
+		if (*(s + i) && ft_isdigit(*(s + i)))
+			return (1);
+		return (0);
+	}
+	return (0);
+}
