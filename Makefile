@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/03/04 13:19:44 by jrobin           ###   ########.fr        #
+#    Updated: 2018/03/05 18:18:57 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			ft_istype/ft_islower.c \
 			ft_istype/ft_isupper.c \
 			ft_istype/ft_isprint.c \
+			ft_istype/ft_isspace.c \
 			\
 			ft_lst/ft_lstadd.c \
 			ft_lst/ft_lstdel.c \
