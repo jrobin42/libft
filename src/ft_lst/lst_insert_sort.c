@@ -6,19 +6,19 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 14:06:18 by jrobin            #+#    #+#             */
-/*   Updated: 2018/01/30 01:23:29 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/25 21:25:12 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_lst.h"
 
-int		lst_insert_sort(t_list *insert, t_list **lst, int (*f)())
+int		lst_insert_sort(t_list **lst, t_list *insert, int (*f)())
 {
-	if (!f || !insert || !lst || !*lst)
+	if (!f || !insert || !lst)
 		return (1);
 	while (*lst && (*lst)->content)
 	{
-		if (*lst && f(insert->content, (*lst)->content) <= 0)
+		if (insert->content && f(insert->content, (*lst)->content) <= 0)
 		{
 			insert->next = *lst;
 			*lst = insert;

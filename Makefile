@@ -6,14 +6,14 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/03/05 18:38:12 by jrobin           ###   ########.fr        #
+#    Updated: 2018/04/20 17:21:33 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=	libft.a
 
 CC=		gcc
-FLAGS=	-Wall -Wextra -Werror
+FLAGS=	-Wall -Wextra -Werror -g
 
 DIR_SRC:= src/
 DIR_OBJ:= obj/
@@ -59,7 +59,6 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			ft_str/ft_strnequ.c \
 			\
 			ft_mem/ft_memalloc.c \
-			ft_mem/ft_memdel.c \
 			ft_mem/ft_memset.c \
 			ft_mem/ft_memmove.c \
 			ft_mem/ft_memcpy.c \
@@ -69,6 +68,7 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			\
 			ft_clear/ft_strdel.c \
 			ft_clear/ft_free_tab.c \
+			ft_clear/ft_memdel.c \
 			\
 			ft_istype/ft_isalnum.c \
 			ft_istype/ft_isalpha.c \
@@ -114,10 +114,12 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			ft_istype/ft_isint.c \
 			\
 			ft_lst/ft_lstadd.c \
+			ft_lst/ft_lstadd_end.c \
 			ft_lst/ft_lstdel.c \
 			ft_lst/ft_lstdelone.c \
 			ft_lst/ft_lstiter.c \
 			ft_lst/ft_lstnew.c \
+			ft_lst/ft_lstnew_na.c \
 			ft_lst/ft_lstmap.c \
 			ft_lst/lst_insert_sort.c
 			
@@ -128,10 +130,10 @@ OBJS= $(addprefix $(DIR_OBJ), $(SRC_BASE:.c=.o))
 
 all:
 	@make -j $(NAME)
-	@echo "\033[32mlibft ok\033[0m"
 
 $(NAME): $(DIR_OBJ) $(OBJS) Makefile
 	@ar rc $(NAME) $(OBJS)
+	@echo "\033[32mlibft ok\033[0m"
 
 DEBUG: 
 	@echo $(OBJS)
@@ -141,7 +143,7 @@ $(DIR_OBJ):
 	@mkdir -p $(dir $(OBJS))
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c Makefile
-	@$(CC) $(FLAGS) -I inc/ -MMD -c $< -o $@  
+	$(CC) $(FLAGS) -I includes/ -MMD -c $< -o $@  
 
 clean:
 	@rm -rf $(DIR_OBJ)

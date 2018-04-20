@@ -6,13 +6,14 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 06:39:25 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 18:07:36 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/04/19 21:31:05 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_str.h"
 #include "libft_put.h"
 #include "libft_mem.h"
+#include "ft_printf.h"
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -26,7 +27,7 @@ int		add_stock(char *stock, char **line)
 		*line = ft_strdup(stock);
 	else
 		*line = ft_strjoin(*line, stock);
-	free(tmp);
+	ft_strdel(&tmp);
 	return (*line == NULL ? -1 : 1);
 }
 
@@ -45,16 +46,15 @@ int		read_fd(int fd, char *stock, int *ret, char *line)
 	stock[*ret] = 0;
 	if (!(*ret) && !ft_strlen(line))
 	{
-		free(line);
+		ft_strdel(&line);
 		line = NULL;
 		return (0);
 	}
 	return (1);
 }
 
-int		no_nl(char *stock, char ***line, int ret, int j)
+int		no_nl(char *stock, char ***line, int j)
 {
-	(void)ret;
 	if (add_stock(stock, *line) == -1)
 		return (-1);
 	while (++j < BUFF_SIZE_GNL)
@@ -80,7 +80,7 @@ int		get_next_line(const int fd, char **line)
 		if ((i = (!ft_strlen(stock) ? read_fd(fd, stock, &ret, *line) : 1)) < 1)
 			return (i);
 		if ((i = (ft_strchr(stock, '\n') - stock)) < 0)
-			if ((j = no_nl(stock, &line, ret, -1)) != 0)
+			if ((j = no_nl(stock, &line, -1)) != 0)
 				return (j);
 		if ((i = (i >= 0 ? is_nl(stock, i, line, 1) : 0)))
 			return (i);

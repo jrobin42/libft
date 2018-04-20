@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/16 21:00:56 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/09 08:06:01 by jrobin           ###   ########.fr       */
+/*   Created: 2017/06/05 06:54:26 by jrobin            #+#    #+#             */
+/*   Updated: 2018/04/19 18:27:16 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_str.h"
+#include "libft_lst.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+/*
+ *	lst new no allocated
+ */
+
+t_list	*ft_lstnew_na(void *content, size_t content_size)
 {
-	int		i;
+	t_list		*new;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (!(new = (t_list *)ft_memalloc(sizeof(t_list))))
+		exit (-1);
+	if (content == NULL)
+	{
+		new->content = NULL;
+		new->content_size = 0;
+		new->next = NULL;
+	}
+	else
+	{
+		new->content_size = content_size;
+		new->content = content;
+		new->next = NULL;
+	}
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 18:12:20 by jrobin            #+#    #+#             */
-/*   Updated: 2017/06/20 11:10:08 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/09 04:34:06 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr_fd(char const *str, int fd)
 {
-	write(fd, &str[0], ft_strlen(str));
+	write(fd, str, ft_strlen(str));
 }

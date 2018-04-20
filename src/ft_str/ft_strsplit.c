@@ -6,11 +6,12 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 04:27:27 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/04 18:06:51 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/03/08 20:47:03 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_str.h"
+#include "ft_printf.h"
 
 static char		**ft_malloc_tab(const char *str, char c, int i)
 {
@@ -30,7 +31,7 @@ static char		**ft_malloc_tab(const char *str, char c, int i)
 			i++;
 	}
 	if (!(tab = (char **)malloc((nb_de_mots + 1) * sizeof(char *))))
-		exit(1);
+		return (NULL);
 	return (tab);
 }
 
@@ -46,15 +47,18 @@ char			**ft_strsplit(char const *str, char c)
 	lettre = 0;
 	mot = 0;
 	if (!str || !(tab = ft_malloc_tab(str, c, i)))
-		return (0);
+		return (NULL);
 	while (str[i])
 	{
 		while (str[i] == c)
 			i++;
 		j = i;
-		while (str[i] && str[i++] != c)
-			if ((str[i] == 0 && str[i - 1] != c) || str[i] == c)
+		while (str[i] && str[i] != c)
+		{
+			++i;
+			if (str[i] == 0 /*&& str[i - 1] != c)*/ || str[i] == c)
 				tab[mot++] = ft_strsub(str, j, (i - j));
+		}
 	}
 	tab[mot] = 0;
 	return (tab);
