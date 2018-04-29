@@ -6,14 +6,14 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/04/20 17:21:33 by jrobin           ###   ########.fr        #
+#    Updated: 2018/04/29 02:15:45 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=	libft.a
 
 CC=		gcc
-FLAGS=	-Wall -Wextra -Werror -g
+FLAGS=	-Wall -Wextra -Werror
 
 DIR_SRC:= src/
 DIR_OBJ:= obj/
