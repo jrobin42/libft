@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:28:22 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/06 09:39:54 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/04/29 00:00:33 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int		between_min_max(char *s, int sign)
 	if (ft_strlen(s) >= 10)
 	{
 		i = 0;
-		while (ft_isdigit(*(s + i)))
+		while (*(s + i) && ft_isdigit(*(s + i)))
 			++i;
-		*(s + i) = 0;
+		if (s[i])
+			s[i] = 0;
 		if (ft_strlen(s) == 10)
 		{
 			if (sign == 1)
@@ -32,9 +33,8 @@ int		between_min_max(char *s, int sign)
 				if (ft_strcmp(s, "2147483647") > 0)
 					return (0);
 			}
-			else
-				if (ft_strcmp(s, "2147483648") > 0)
-					return (0);
+			else if (ft_strcmp(s, "2147483648") > 0)
+				return (0);
 		}
 		else
 			return (0);
@@ -45,28 +45,27 @@ int		between_min_max(char *s, int sign)
 int		ft_isint(char *s)
 {
 	int		i;
+	int		j;
 	int		sign;
 
-	if (s)
-	{
-		i = 0;
-		sign = 1;
-		while (*s && ft_isspace(*s))
-			++s;
-		if (*s && (*s == '+' || *s == '-') && s++)
-			*s == '-' ? sign = -1 : 0;
-		while (*s == '0')
-			++s;
-		if (!*s && *(s - 1) == '0')
-			return (1);
-		while (*(s + i) && ft_isdigit(*(s + i)))
-			++i;
-		while (*(s + i) && ft_isspace(*(s + i)))
-			++i;
-		if (*(s + i))
-			return (0);
-		return ((*(s + 1) && between_min_max((s + 1), sign)) ||
-				(*s && !*(s + 1) && ft_isdigit(*s)) ? 1 : 0);
-	}
-	return (0);
+	if (!s)
+		return (0);
+	i = 0;
+	sign = 1;
+	while (s[i] && ft_isspace(s[i]))
+		++i;
+	if (s[i] && (s[i] == '+' || s[i] == '-'))
+		s[i++] == '-' ? sign = -1 : 0;
+	while (s[i] == '0')
+		++i;
+	if (!s[i] && i > 0 && s[i - 1] == '0')
+		return (1);
+	j = i;
+	while (s[i] && ft_isdigit(s[i]))
+		++i;
+	while (s[i] && ft_isspace(s[i]))
+		++i;
+	if (s[i])
+		return (0);
+	return ((s[j] && between_min_max((s + j), sign)));
 }

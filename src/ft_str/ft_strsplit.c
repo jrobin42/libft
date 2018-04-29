@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 04:27:27 by jrobin            #+#    #+#             */
-/*   Updated: 2018/03/08 20:47:03 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/04/29 00:07:35 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static char		**ft_malloc_tab(const char *str, char c, int i)
 		while (str[i] && str[i] == c)
 			i++;
 	}
-	if (!(tab = (char **)malloc((nb_de_mots + 1) * sizeof(char *))))
-		return (NULL);
+	if (!(tab = (char **)ft_memalloc((nb_de_mots + 1) * sizeof(char *))))
+		exit(-1);
 	return (tab);
 }
 
@@ -56,7 +56,7 @@ char			**ft_strsplit(char const *str, char c)
 		while (str[i] && str[i] != c)
 		{
 			++i;
-			if (str[i] == 0 /*&& str[i - 1] != c)*/ || str[i] == c)
+			if (str[i] == 0 || str[i] == c)
 				tab[mot++] = ft_strsub(str, j, (i - j));
 		}
 	}

@@ -6,22 +6,22 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 06:54:26 by jrobin            #+#    #+#             */
-/*   Updated: 2018/04/19 18:27:16 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/04/29 00:01:46 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_lst.h"
 
 /*
- *	lst new no allocated
- */
+**	lst new no allocated
+*/
 
 t_list	*ft_lstnew_na(void *content, size_t content_size)
 {
 	t_list		*new;
 
 	if (!(new = (t_list *)ft_memalloc(sizeof(t_list))))
-		exit (-1);
+		exit(-1);
 	if (content == NULL)
 	{
 		new->content = NULL;
