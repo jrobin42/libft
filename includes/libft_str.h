@@ -6,7 +6,7 @@
 /*   By: jrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:26:38 by jrobin            #+#    #+#             */
-/*   Updated: 2018/04/05 01:49:26 by jrobin           ###   ########.fr       */
+/*   Updated: 2018/04/30 16:05:54 by jrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			**ft_strsplit(char const *str, char c);
+int				countchar(char *s, char c);
 
 #endif

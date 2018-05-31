@@ -6,7 +6,7 @@
 #    By: jrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/11 19:28:47 by jrobin            #+#    #+#              #
-#    Updated: 2018/04/29 02:19:35 by jrobin           ###   ########.fr        #
+#    Updated: 2018/04/30 16:17:14 by jrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC_BASE=	ft_int/ft_itoa.c \
 			ft_str/ft_strmapi.c \
 			ft_str/ft_strequ.c \
 			ft_str/ft_strnequ.c \
+			ft_str/countchar.c \
 			\
 			ft_mem/ft_memalloc.c \
 			ft_mem/ft_memset.c \
