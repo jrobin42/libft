@@ -2,16 +2,14 @@
 // Created by Jeanne Robin on 21/10/2019.
 //
 
-#ifndef LIBFT_LIBFT_H
-# define LIBFT_LIBFT_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include "./src/ft_printf/include/ft_printf.h"
-# include "./src/ft_clear/include/libft_clear.h"
-# include "./src/ft_int/include/libft_int.h"
-# include "./src/ft_lst/include/libft_lst.h"
-# include "./src/ft_mem/include/libft_mem.h"
-# include "./src/ft_put/include/libft_put.h"
-# include "./src/ft_str/include/libft_str.h"
-# include "./src/ft_istype/include/libft_type.h"
+# include "./src/integer/include/f_integer.h"
+# include "./src/list/include/f_list.h"
+# include "./src/memory/include/f_memory.h"
+# include "./src/output/include/f_output.h"
+# include "./src/output/ft_printf/include/ft_printf.h"
+# include "./src/string/include/f_string.h"
 
-#endif //LIBFT_LIBFT_H
+#endif //LIBFT_H
