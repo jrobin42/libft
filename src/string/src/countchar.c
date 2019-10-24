@@ -15,11 +15,12 @@ int		countchar(char *s, char c)
 	int		i;
 
 	i = 0;
-	while (s && *s)
-	{
-		if (*s && *s == c)
-			++i;
-		++s;
-	}
+	if (s)
+        while (*s)
+        {
+            if (*s == c)
+                ++i;
+            ++s;
+        }
 	return (i);
 }

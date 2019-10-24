@@ -32,7 +32,7 @@ static char		**ft_malloc_tab(const char *str, char c, int i)
 			i++;
 	}
 	if (!(tab = (char **)ft_memalloc((nb_de_mots + 1) * sizeof(char *))))
-		exit(-1);
+		return NULL;
 	return (tab);
 }
 

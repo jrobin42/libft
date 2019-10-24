@@ -10,14 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+
 char	*ft_strchr(const char *str, int c)
 {
 	int		i;
 
-	i = -1;
 	if (str)
-		while (str[++i])
-			if (str[i] == c)
-				return ((char *)&str[i]);
-	return 0;
+    {
+	    i = 0;
+	    while (str[i])
+        {
+	        if (str[i] == c)
+                return ((char *) str + i);
+	        i++;
+        }
+    }
+	return (char *)((str && !c) ? str + i : NULL);
 }

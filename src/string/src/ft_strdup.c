@@ -23,7 +23,7 @@ char	*ft_strdup(char *str)
 		return (ft_memalloc(1));
 	i = 0;
 	if (!(cpy = (char *)malloc((ft_strlen(str) + 1) * sizeof(char))))
-		exit(1);
+		return NULL;
 	while (str[i])
 	{
 		cpy[i] = str[i];

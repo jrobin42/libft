@@ -31,7 +31,7 @@ char	*ft_itoa(int n)
 		tmp = tmp / 10;
 	i = n == 0 ? 1 : i;
 	if (!(nb = (char *)malloc((i + j + 1) * sizeof(char))))
-		exit(1);
+		return NULL;
 	nb[0] = j == 1 ? '-' : ' ';
 	nb[i + j] = 0;
 	while (i-- > 0)

@@ -22,7 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (s && f)
 	{
 		if (!(s2 = (char *)malloc((ft_strlen(s) + 1) * sizeof(char))))
-			exit(1);
+			return NULL;
 		while (s[i])
 		{
 			s2[i] = f(i, s[i]);

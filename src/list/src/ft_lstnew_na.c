@@ -23,7 +23,7 @@ t_list	*ft_lstnew_na(void *content, size_t content_size)
 	t_list		*new;
 
 	if (!(new = (t_list *)ft_memalloc(sizeof(t_list))))
-		exit(-1);
+        return NULL;
 	if (content == NULL)
 	{
 		new->content = NULL;

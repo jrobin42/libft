@@ -20,6 +20,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2 || !(s3 = (char *)ft_memalloc((ft_strlen(s1) +
 	ft_strlen(s2) + 1) * sizeof(char))))
-		exit(1);
-	return (ft_strcat(ft_strcat(s3, s1), s2));
+		return NULL;
+	return ft_strcat(ft_strcat(s3, s1), s2);
 }

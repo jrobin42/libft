@@ -138,7 +138,7 @@ SRC_BASE=	$(DIR_SRC_INT)ft_itoa.c \
 			$(DIR_SRC_LST)ft_lstnew.c \
 			$(DIR_SRC_LST)ft_lstnew_na.c \
 			$(DIR_SRC_LST)ft_lstmap.c \
-			$(DIR_SRC_LST)lst_insert_sort.c
+		 	$(DIR_SRC_LST)lst_insert_sort.c
 			
 INC=		-I $(DIR_INC_INT) \
             -I $(DIR_INC_STR) \
@@ -161,7 +161,7 @@ $(DIR_OBJ):
 	@mkdir -p $(DIR_OBJ)
 	@mkdir -p $(dir $(OBJS))
 
-$(DIR_OBJ)%.o: $(DIR_SRC)%.c Makefile
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c
 	@$(CC) $(FLAGS) $(INC) -MMD -c $< -o $@
 
 clean:
